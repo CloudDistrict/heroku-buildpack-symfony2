@@ -263,6 +263,7 @@ DELIMETR`
 
 	# do the deed!
 	grep -v claylo ${BUILD_DIR}/composer.json | grep -v phpunit | grep -v selenium | grep -v behat | grep -v mink | grep -v coveralls > ${BUILD_DIR}/temp && mv ${BUILD_DIR}/temp ${BUILD_DIR}/composer.json
+	rm ${BUILD_DIR}/composer.lock
 	
 	echo "Running: php composer.phar install" | indent
 	LD_LIBRARY_PATH="${BUILD_DIR}/local/lib" ${BUILD_DIR}/vendor/php/bin/php composer.phar install -n | indent
