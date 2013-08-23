@@ -262,6 +262,8 @@ DELIMETR`
 	LD_LIBRARY_PATH="${BUILD_DIR}/local/lib" ${BUILD_DIR}/vendor/php/bin/php -r "phpinfo();" | grep 'Configuration File'
 
 	# do the deed!
+	grep -v claylo ${BUILD_DIR}/composer.json | grep -v phpunit | grep -v behat | grep -v mink | grep -v coveralls > ${BUILD_DIR}/temp && mv ${BUILD_DIR}/temp ${BUILD_DIR}/composer.json
+	
 	echo "Running: php composer.phar install" | indent
 	LD_LIBRARY_PATH="${BUILD_DIR}/local/lib" ${BUILD_DIR}/vendor/php/bin/php composer.phar install -n | indent
 
@@ -291,11 +293,6 @@ echo "-------> Running: app/console assets:install --env=${SF_ENV}"
 LD_LIBRARY_PATH="${BUILD_DIR}/local/lib" ${BUILD_DIR}/vendor/php/bin/php ${BUILD_DIR}/app/console assets:install
 echo "-------> Running: app/console assetic:dump ${SF_DEBUG} --env=${SF_ENV}"
 LD_LIBRARY_PATH="${BUILD_DIR}/local/lib" ${BUILD_DIR}/vendor/php/bin/php ${BUILD_DIR}/app/console assetic:dump
-
-echo "-----> Deleting testing vendors"
-rm ${BUILD_DIR}/vendors/claylo -r
-rm ${BUILD_DIR}/vendors/behat -r
-rm ${BUILD_DIR}/vendors/phpunit -r
 
 echo "-----> Installing boot script"
 cd $BUILD_DIR
