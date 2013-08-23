@@ -29,7 +29,7 @@ http {
     server_name localhost;
 
     root /app/web;
-    index app.php index.php index.html index.htm;
+    index index.php index.html index.htm;
 
     # Some basic cache-control for static files to be sent to the browser
     location ~* \.(?:ico|css|js|gif|jpeg|jpg|png)$ {
@@ -91,16 +91,16 @@ http {
     # # }
     #}
 
-    # strip app.php/ prefix if it is present
-    rewrite ^/app\.php/?(.*)$ /$1 permanent;
+    # strip index.php/ prefix if it is present
+    rewrite ^/index\.php/?(.*)$ /$1 permanent;
 
     location / {
-      index app.php;
+      index index.php;
       try_files $uri @rewriteapp;
     }
 
     location @rewriteapp {
-      rewrite ^(.*)$ /app.php/$1 last;
+      rewrite ^(.*)$ /index.php/$1 last;
     }
 
     # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
