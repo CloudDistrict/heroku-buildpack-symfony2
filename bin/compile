@@ -230,6 +230,11 @@ then
 	# Deactivating plugins from php.ini (they won't be found)
 	sed -i 's/extension=\(\w*\.so\)/;extension=\1/g' ${BUILD_DIR}/vendor/php/bin/php.ini
 
+        if [ -r ${BUILD_DIR}/ext/mongo.so ]
+        then
+               echo "Encontrado Mongo" | indent
+               echo "extension=${BUILD_DIR}/ext/mongo.so" >> ${BUILD_DIR}/vendor/php/bin/php.ini
+        fi
 
 	if [ ! -r ${BUILD_DIR}/app/config/parameters.yml ]; then
 		if [ ! -r ${BUILD_DIR}/app/config/parameters_prod.yml.erb ]; then
