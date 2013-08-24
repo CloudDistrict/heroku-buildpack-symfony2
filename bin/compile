@@ -369,7 +369,8 @@ fi
 
 # Expose Heroku config vars to PHP-FPM processes
 for var in \`env | cut -f1 -d=\`; do
-	echo "env[SYMFONY_\$var] = '\\$\${var}'" | sed -r 's/_/__/g' >> /app/vendor/php/etc/php-fpm.conf
+	TEMP = $(echo "env[SYMFONY_\$var] = " | sed -r 's/_/__/g')
+	echo "$TEMP\\$\${var}">> /app/vendor/php/etc/php-fpm.conf
 done
 
 touch /app/vendor/nginx/logs/access.log /app/vendor/nginx/logs/error.log /app/vendor/php/var/log/php-fpm.log /app/vendor/php/var/log/php-errors.log /app/local/var/log/newrelic/newrelic-daemon.log /app/local/var/log/newrelic/php_agent.log
