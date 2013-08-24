@@ -374,7 +374,7 @@ for var in \`env | cut -f1 -d=\`; do
 done
 
 #Sustituimos la linea de conexion del config de mongo por la variable recien sacada
-sed "s/mongodb:.*/\"%mongohq.url%\"/g" /app/app/config/config.yml > /app/app/config/config.tmp
+sed "s/mongodb:\/.*/\"%mongohq.url%\"/g" /app/app/config/config.yml > /app/app/config/config.tmp
 mv /app/app/config/config.tmp /app/app/config/config.yml
 
 touch /app/vendor/nginx/logs/access.log /app/vendor/nginx/logs/error.log /app/vendor/php/var/log/php-fpm.log /app/vendor/php/var/log/php-errors.log /app/local/var/log/newrelic/newrelic-daemon.log /app/local/var/log/newrelic/php_agent.log
