@@ -328,15 +328,15 @@ if [ -d /app/conf ]; then
 	if [ -r /app/conf/php.ini ]; then
 		cp -f /app/conf/php.ini /app/vendor/php/php.ini
 	fi
-	
-	if [ -r /app/ext/mongo.so ]; then
-	        echo "extension=/app/ext/mongo.so" >> /app/vendor/php/php.ini
-	fi
 
 	if [ -r /app/conf/nginx.conf.erb ]; then
 		cp -f /app/conf/nginx.conf.erb /app/vendor/nginx/conf/nginx.conf.erb
 	fi
 
+fi
+
+if [ -r /app/ext/mongo.so ]; then
+	echo "extension=/app/ext/mongo.so" >> /app/vendor/php/php.ini
 fi
 
 # Set correct port variable.
