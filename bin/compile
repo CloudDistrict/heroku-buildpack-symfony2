@@ -378,9 +378,10 @@ sed "s/mongodb:\/.*/\"%mongohq.url%\"/g" /app/app/config/config.yml > /app/app/c
 mv /app/app/config/config.tmp /app/app/config/config.yml
 
 if [ -z "\$MONGOHQ_URL" ]; then
+   echo "Encontrada entrada de mongo"
    TEMP=\`echo \$MONGOHQ_URL | sed "s/.*:[0-9]*\// /g"\`
    sed "s/default_database:.*/default_database: \$TEMP/g" /app/app/config/config.yml > /app/app/config/config.tmp
-   mv /app/app/config/config.tmp /app/app/config/config.yml1
+   mv /app/app/config/config.tmp /app/app/config/config.yml
 fi
 
 touch /app/vendor/nginx/logs/access.log /app/vendor/nginx/logs/error.log /app/vendor/php/var/log/php-fpm.log /app/vendor/php/var/log/php-errors.log /app/local/var/log/newrelic/newrelic-daemon.log /app/local/var/log/newrelic/php_agent.log
