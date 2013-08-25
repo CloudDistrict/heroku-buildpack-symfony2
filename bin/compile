@@ -380,7 +380,7 @@ mv /app/app/config/config.tmp /app/app/config/config.yml
 if [ \${MONGOHQ_URL} ]; then
    echo "Encontrada entrada de mongo"
    TEMP=\`echo \$MONGOHQ_URL | sed "s/.*:[0-9]*\// /g"\`
-   sed "s/default_database:.*/default_database: \$TEMP/g" /app/app/config/config.yml > /app/app/config/config.tmp
+   sed "s/default_database:.*/default_database: \$TEMP/g" /app/app/config/config.yml | sed "s/\s+database:.*/        database: \$TEMP/g" > /app/app/config/config.tmp
    mv /app/app/config/config.tmp /app/app/config/config.yml
 fi
 
